@@ -7,17 +7,21 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
-import { FooComponent } from './foo/foo.component';
+import { LoginModule } from './login/login.module';
+import { ChannelModule } from './channel/channel.module';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FooComponent
+    AppComponent
   ],
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot()
+    IonicModule.forRoot(),
+    LoginModule,
+    ChannelModule,
+    ProfileModule
   ],
   providers: [
     StatusBar,
