@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChannelComponent } from './channel.component';
 import { InputComponent } from './input/input.component';
 import { ChannelRoutingModule } from './channel-routing.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -13,6 +14,7 @@ import { ChannelRoutingModule } from './channel-routing.module';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     ChannelRoutingModule
   ]
 })

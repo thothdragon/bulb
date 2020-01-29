@@ -11,6 +11,7 @@ import { LoginModule } from './login/login.module';
 import { ChannelModule } from './channel/channel.module';
 import { ProfileModule } from './profile/profile.module';
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,10 @@ import { AppRoutingModule } from './app-routing.module';
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
     LoginModule,
     ChannelModule,
     ProfileModule,
+    SharedModule,
     AppRoutingModule
   ],
   providers: [

@@ -7,7 +7,7 @@
 
 Create new repository
 ```bash
-$ npm install cordova --save -dev
+$ npm install cordova
 ```
 
 ### :shipit: Create Project
@@ -19,7 +19,7 @@ $ npm create myApp
 And run a new install
 
 ```bash
-$ npm install cordova
+$ npm i cordova
 ```
 
 ### :shipit: Add platform
