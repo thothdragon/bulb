@@ -8,13 +8,7 @@ import { ChannelComponent } from './channel/channel.component';
 
 const routes: Routes = [
   {
-    path: `login`, component: LoginComponent
-  },
-  {
-    path: `profile`, component: ProfileComponent
-  },
-  {
-    path: `channel`, component: ChannelComponent
+    path: `**`, redirectTo: `login`
   }
 ];
 
