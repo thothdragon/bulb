@@ -16,11 +16,6 @@ import { LoginRoutingModule } from './login-routing.module';
   imports: [
     CommonModule,
     LoginRoutingModule
-  ],
-  exports: [
-    LoginComponent,
-    StatusComponent,
-    UserOnlineComponent
   ]
 })
 export class LoginModule { }

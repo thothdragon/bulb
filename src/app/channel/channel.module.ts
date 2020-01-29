@@ -14,10 +14,6 @@ import { ChannelRoutingModule } from './channel-routing.module';
   imports: [
     CommonModule,
     ChannelRoutingModule
-  ],
-  exports: [
-    ChannelComponent,
-    InputComponent
   ]
 })
 export class ChannelModule { }

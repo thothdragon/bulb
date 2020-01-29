@@ -1,14 +1,11 @@
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ChannelComponent } from './channel/channel.component';
-
+import { Routes, RouterModule } from '@angular/router'
 
 const routes: Routes = [
   {
-    path: `**`, redirectTo: `login`
+    path: `**`,
+    redirectTo: `login`
   }
 ];
 
