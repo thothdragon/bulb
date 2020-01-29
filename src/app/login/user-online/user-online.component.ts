@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserListService } from 'src/app/shared/services/user-list.service';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-user-online',
@@ -7,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserOnlineComponent implements OnInit {
 
-  constructor() { }
+  private userOnline: User[];
 
-  ngOnInit() {}
+  constructor(
+    private userList: UserListService
+  ) {
+    this.userOnline = this.userList.getUserList();
+  }
+
+  ngOnInit() { }
+
 
 }
