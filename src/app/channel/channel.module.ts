@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChannelComponent } from './channel.component';
 import { InputComponent } from './input/input.component';
+import { ChannelRoutingModule } from './channel-routing.module';
 
 
 
@@ -11,7 +12,8 @@ import { InputComponent } from './input/input.component';
     InputComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ChannelRoutingModule
   ],
   exports: [
     ChannelComponent,

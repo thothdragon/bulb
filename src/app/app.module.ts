@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
 import { ChannelModule } from './channel/channel.module';
 import { ProfileModule } from './profile/profile.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProfileModule } from './profile/profile.module';
     IonicModule.forRoot(),
     LoginModule,
     ChannelModule,
-    ProfileModule
+    ProfileModule,
+    AppRoutingModule
   ],
   providers: [
     StatusBar,
