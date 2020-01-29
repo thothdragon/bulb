@@ -9,12 +9,12 @@ import { User } from 'src/app/shared/models/user.model';
 })
 export class UserOnlineComponent implements OnInit {
 
-  private userOnline: User[];
+  private userList: User[];
 
   constructor(
-    private userList: UserListService
+    private userListService: UserListService
   ) {
-    this.userOnline = this.userList.getUserList();
+    this.userList = this.userListService.getUserList();
   }
 
   ngOnInit() { }

@@ -2,8 +2,16 @@
   <ion-title>Login Component</ion-title>
 </ion-toolbar>
 
-<app-status></app-status>
+<ion-icon name="at"></ion-icon>
 
-<app-user-online>User Online</app-user-online>
+<p>
 
-<a [routerLink]="['/profile']"><ion-button>Login</ion-button></a>
+  <app-status></app-status>
+
+  <app-user-online></app-user-online>
+
+</p>
+
+<a [routerLink]="['/profile']">
+  <ion-button>Login</ion-button>
+</a>

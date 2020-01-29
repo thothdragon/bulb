@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageListService } from '../shared/services/message-list.service';
+import { Message } from '../shared/models/message.model';
 
 @Component({
   selector: 'app-channel',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChannelComponent implements OnInit {
 
-  constructor() { }
+  private messageList: Message[];
+
+  constructor(
+    private messageListService: MessageListService
+  ) { 
+    this.messageList = this.messageListService.getMessageList();
+   }
 
   ngOnInit() {}
 
