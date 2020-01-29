@@ -10,7 +10,7 @@ Create new repository
 $ npm install cordova
 ```
 
-### :shipit: Create Project
+### :pushpin: Create Project
 
 ```bash
 $ npm create myApp
@@ -22,5 +22,10 @@ And run a new install
 $ npm i cordova
 ```
 
-### :shipit: Add platform
+### :pushpin: Add platform
 
+Add platform of device, becareful to select cordova in this folder (./noode_modules/.bin/cordova)
+
+```bash
+$ cordova platform add android|iOS
+```
