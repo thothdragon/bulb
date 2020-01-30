@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
       pseudo: ['', Validators.required],
       age: [''],
       city: [''],
-      gender:[''],
+      gender:['Male'||'Female'||'Neutral'],
       role:['Visitor'||'Admin'],
       avatar:[''],
     });
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
     this.userListService.setUserList(this.todo.value);
 
     console.log(this.todo.value);
-    
+
     console.log(this.userListService);
     
   }
