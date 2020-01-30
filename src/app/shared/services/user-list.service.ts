@@ -16,4 +16,10 @@ export class UserListService {
 
   }
 
+  public setUserList(newUser) {
+
+    this.userList.push(newUser);
+    
+  }
+
 }

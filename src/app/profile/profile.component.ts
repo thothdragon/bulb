@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { UserListService } from '../shared/services/user-list.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,20 +13,30 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private userListService: UserListService,
   ) {
     this.todo = formBuilder.group({
       pseudo: ['', Validators.required],
       age: [''],
       city: [''],
-      gender:['Male'||'Female'||'Neutral'],
-      role:['Visitor'],
+      gender:[''],
+      role:['Visitor'||'Admin'],
       avatar:[''],
     });
   }
-
+  
   logForm() {
-    console.log(this.todo.value)
+    
+    this.userListService.setUserList(this.todo.value);
+
+    console.log(this.todo.value);
+    
+    console.log(this.userListService);
+    
   }
+
+  
+  
 
   ngOnInit() { }
 
