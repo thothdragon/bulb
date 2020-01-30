@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -7,8 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  private todo: FormGroup;
 
-  ngOnInit() {}
+  constructor(
+    private formBuilder: FormBuilder,
+  ) {
+    this.todo = formBuilder.group({
+      pseudo: ['', Validators.required],
+      age: [''],
+      city: [''],
+      gender:['Male'||'Female'||'Neutral'],
+      role:['Visitor'],
+      avatar:[''],
+    });
+  }
+
+  logForm() {
+    console.log(this.todo.value)
+  }
+
+  ngOnInit() { }
 
 }

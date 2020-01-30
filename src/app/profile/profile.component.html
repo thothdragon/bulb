@@ -1,7 +1,52 @@
-<ion-toolbar color="primary">
+<!-- <ion-toolbar >
   <ion-title>Profile Component</ion-title>
-</ion-toolbar>
+</ion-toolbar> -->
 
-<ion-icon name="transgender"></ion-icon> Genre
+<ion-card>
+  <ion-card-header color="primary">
+    <!-- <ion-card-subtitle>Card Subtitle</ion-card-subtitle> -->
+    <ion-card-title>Profile</ion-card-title>
+  </ion-card-header>
 
-<a [routerLink]="['/channel']"><ion-button>Go to Tchat</ion-button></a>
+  <ion-card-content>
+
+    <form [formGroup]="todo" (ngSubmit)="logForm()">
+      <ion-item>
+        <ion-label>Pseudo</ion-label>
+        <ion-input type="text" formControlName="pseudo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Age</ion-label>
+        <ion-input type="number" formControlName="age"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>City</ion-label>
+        <ion-input type="text" formControlName="city"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <div>
+            <ion-icon name="transgender"></ion-icon> Gender
+          </div>
+        </ion-label>
+        <ion-input type="text" formControlName="gender"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Role</ion-label>
+        <ion-input type="text" formControlName="role"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Avatar</ion-label>
+        <ion-input type="text" formControlName="avatar"></ion-input>
+      </ion-item>
+      <ion-button type="submit" [disabled]="!todo.valid">Submit</ion-button>
+    </form>
+
+  </ion-card-content>
+</ion-card>
+
+
+
+<a [routerLink]="['/channel']">
+  <ion-button>Go to Tchat</ion-button>
+</a>
