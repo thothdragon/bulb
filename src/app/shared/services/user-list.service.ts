@@ -10,16 +10,16 @@ export class UserListService {
 
   constructor() { }
 
-  public getUserList(): User[] {
+  public get(): User[] {
 
     return this.userList;
 
   }
 
-  public setUserList(newUser) {
+  public set(newUser: User): void {
 
     this.userList.push(newUser);
-    
+
   }
 
 }

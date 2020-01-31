@@ -14,7 +14,7 @@ export class UserOnlineComponent implements OnInit {
   constructor(
     private userListService: UserListService
   ) {
-    this.userList = this.userListService.getUserList();
+    this.userList = this.userListService.get();
   }
 
   ngOnInit() { }

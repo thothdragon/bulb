@@ -1,5 +1,5 @@
 export class Role {
 
-    public value: string;
+    public admin: boolean;
 
 }

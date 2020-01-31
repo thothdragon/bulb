@@ -8,53 +8,69 @@
 
   <ion-card-content>
 
-    <form [formGroup]="todo" (ngSubmit)="logForm()">
+    <form *ngIf="userForm" [formGroup]="userForm" (ngSubmit)="saveUser()">
 
       <ion-item>
-        <ion-label position="floating">
-          <ion-icon size="large" name="finger-print"></ion-icon> Pseudo <ion-text color="danger">*</ion-text>
+        <ion-label>
+          <ion-icon color="danger" size="large" name="finger-print"></ion-icon>
+          <!-- <ion-text >*</ion-text> -->
         </ion-label>
-        <ion-input type="text" formControlName="pseudo"></ion-input>
+        <ion-input placeholder="Choose your pseudo" type="text" formControlName="pseudo"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">
-          <ion-icon size="large" name="flask"></ion-icon> Age
+        <ion-label class="label label-ios">
+          <!-- <ion-icon size="large" name="flask"></ion-icon> -->
+          <ion-icon size="large" name="clock"></ion-icon>
+          {{userForm.get('age').value || 0}} year(s)
         </ion-label>
-        <ion-input type="number" formControlName="age"></ion-input>
+        <!-- <ion-input type="number" min="0" max="130" formControlName="age"></ion-input> -->
+        <ion-range formControlName="age" min="0" max="130" type="number" [(ngModel)]="user.age" color="primary">
+          <ion-label slot="start">0</ion-label>
+          <ion-label slot="end">130</ion-label>
+        </ion-range>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">
-          <ion-icon size="large" name="business"></ion-icon> City
+        <ion-label>
+          <ion-icon size="large" name="business"></ion-icon>
         </ion-label>
-        <ion-input type="text" formControlName="city"></ion-input>
+        <ion-input placeholder="Choose your city" type="text" formControlName="city"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">
-          <ion-icon size="large" name="transgender"></ion-icon> Gender
+        <ion-label>
+          <ion-icon size="large" name="transgender"></ion-icon>
         </ion-label>
         <ion-select formControlName="gender" placeholder="Choose your gender">
-          <ion-select-option value="Male" selected>Male</ion-select-option>
-          <ion-select-option value="Female">Female</ion-select-option>
-          <ion-select-option value="Neutral">Neutral</ion-select-option>
+          <ion-select-option value="0">Male</ion-select-option>
+          <ion-select-option value="1">Female</ion-select-option>
+          <ion-select-option value="2">Neutral</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item hidden>
+      <ion-item>
+        <ion-label>
+          <ion-icon size="large" name="eye"></ion-icon>
+        </ion-label>
+        <ion-fab-button (click)="prev()" size="small" color="light">
+          <ion-icon name="arrow-dropleft"></ion-icon>
+        </ion-fab-button>
+        <ion-avatar>
+          <img src="assets/avatars/{{userForm.get('avatar').value}}.png">
+        </ion-avatar>
+        <ion-fab-button (click)="next()" size="small" color="light">
+          <ion-icon name="arrow-dropright"></ion-icon>
+        </ion-fab-button>
+        <!-- <ion-input type="text" formControlName="avatar"></ion-input> -->
+      </ion-item>
+
+      <!-- <ion-item hidden>
         <ion-label position="floating">Role</ion-label>
         <ion-input disabled value="Visitor" type="text" formControlName="role"></ion-input>
-      </ion-item>
+      </ion-item> -->
 
-      <ion-item>
-        <ion-label position="floating">
-          <ion-icon size="large" name="eye"></ion-icon> Avatar
-        </ion-label>
-        <ion-input type="text" formControlName="avatar"></ion-input>
-      </ion-item>
-
-      <ion-button type="submit" [disabled]="!todo.valid">Submit</ion-button>
+      <ion-button type="submit" [disabled]="!userForm.valid">Submit</ion-button>
 
     </form>
 
@@ -63,6 +79,6 @@
 </ion-card>
 
 
-<a [routerLink]="['/channel']">
+<a [routerLink]="['/login']">
   <ion-button>Go to Tchat</ion-button>
 </a>
