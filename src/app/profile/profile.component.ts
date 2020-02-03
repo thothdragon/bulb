@@ -41,25 +41,26 @@ export class ProfileComponent implements AfterViewInit {
         city: [this.user.city],
         gender: [this.user.genre],
         avatar: [this.user.avatar],
-        // gender: ['Male' || 'Female' || 'Neutral']
       });
 
     });
 
   }
 
-  saveUser(): void {
+  public saveUser(): void {
 
-    this.userListService.set(this.userForm.value);
+    this.user.pseudo = this.userForm.get('pseudo').value;
+    this.user.age = this.userForm.get('age').value;
+    this.user.city = this.userForm.get('city').value;
+    this.user.genre = this.userForm.get('gender').value;
+    this.user.avatar = this.userForm.get('avatar').value;
 
-    // console.log(this.userForm.value);
-
-    // console.log(this.userListService);
+    this.router.navigate(['/channel']);
 
   }
 
   prev() {
-    let index = avatarList.indexOf(this.userForm.get('avatar').value);    
+    let index = avatarList.indexOf(this.userForm.get('avatar').value);
     if (0 === index) {
       index = avatarList.length - 1
     } else {
@@ -69,7 +70,7 @@ export class ProfileComponent implements AfterViewInit {
   }
 
   next() {
-    let index = avatarList.indexOf(this.userForm.get('avatar').value);    
+    let index = avatarList.indexOf(this.userForm.get('avatar').value);
     if (index === avatarList.length - 1) {
       index = 0
     } else {

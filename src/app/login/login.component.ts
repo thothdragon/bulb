@@ -27,9 +27,11 @@ export class LoginComponent implements AfterViewInit {
       }
       user.avatar = avatarList[Math.floor(Math.random() * avatarList.length)];
       this.userService.set(user);
-      // !!! Temp redirection to profile for form dev
-      // this.router.navigate(["/profile"]);
-      // !!! Temp redirection to profile for form dev
+
+      // !!! Temp redirection to channel for form dev
+      user.pseudo = "Thoth"
+      this.router.navigate(["/channel"]);
+      // !!! Temp redirection to channel for form dev
       return;
     }
     this.router.navigate(["/login"]);

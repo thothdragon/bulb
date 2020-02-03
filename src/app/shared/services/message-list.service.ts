@@ -11,9 +11,11 @@ export class MessageListService {
   constructor() { }
 
   public getMessageList(): Message[] {
-
     return this.messageList;
+  }
 
+  public push(message: Message): void {
+    this.messageList.push(message);
   }
 
 }

@@ -1,9 +1,31 @@
-<ion-toolbar color="primary">
-  <!-- <ion-title>Channel Component</ion-title> -->
-  <ion-badge color="success">
-    {{ messageList.length }}
-  </ion-badge> message(s) in the Channel.
-</ion-toolbar>
-<a [routerLink]="['/login']"><ion-button>Exit Channel</ion-button></a>
+<ion-card>
 
-<app-input></app-input>
+  <ion-card-header color="primary">
+
+    <ion-card-title>
+
+      <ion-badge color="success">
+        {{ messageList.length }}
+      </ion-badge> message(s) in the Channel.
+
+    </ion-card-title>
+
+  </ion-card-header>
+
+  <ion-card-content>
+
+    <ion-item>
+
+      Ceci est une boite à message :D
+
+    </ion-item>
+
+    <app-input></app-input>
+
+  </ion-card-content>
+
+</ion-card>
+
+<a [routerLink]="['/login']">
+  <ion-button>Exit Channel</ion-button>
+</a>

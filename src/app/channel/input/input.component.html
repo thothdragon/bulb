@@ -1,3 +1,13 @@
-<p>
-  input works!
-</p>
+<form *ngIf="messageForm" [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+
+    <ion-item>
+
+      <ion-input placeholder="Enter your message" type="text" formControlName="message"></ion-input>
+
+      <ion-button type="submit" [disabled]="!messageForm.valid">
+        Primary
+      </ion-button>
+
+    </ion-item>
+
+  </form>
