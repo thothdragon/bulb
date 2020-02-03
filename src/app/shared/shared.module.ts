@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule }    from '@angular/common/http';
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     RouterModule,
     
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+
+    HttpClientModule,
   ]
 })
 export class SharedModule { }

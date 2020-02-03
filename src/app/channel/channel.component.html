@@ -14,11 +14,17 @@
 
   <ion-card-content>
 
-    <ion-item>
+    <ion-item *ngFor="let message of messageList">
 
-      Ceci est une boite à message :D
+      <ion-avatar slot="start">
 
-      
+        <img src="assets/avatars/{{user.avatar}}.png">
+
+      </ion-avatar>
+
+      <ion-label>
+        {{message.value}}
+      </ion-label>
 
     </ion-item>
 

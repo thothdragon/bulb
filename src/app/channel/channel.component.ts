@@ -20,7 +20,7 @@ export class ChannelComponent implements AfterViewInit {
     private userService: UserService,
     private messageListService: MessageListService,
   ) {
-    this.messageList = this.messageListService.getMessageList();
+    this.messageList = this.messageListService.get();
   }
 
   ngAfterViewInit() {
