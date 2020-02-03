@@ -30,7 +30,6 @@ export class InputComponent implements AfterViewInit {
   }
 
   public sendMessage() {
-    console.log("J'ai posté un message !");
     const message: Message = {
       user: this.userService.get(),
       value: this.messageForm.get('message').value,
