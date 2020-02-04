@@ -3,6 +3,7 @@ import { Message } from '../models/message.model';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { jsonBin } from 'src/environments/json-bin';
 import { UserService } from './user.service';
+import { resolve } from 'url';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,6 @@ import { UserService } from './user.service';
 export class MessageListService {
 
   private messageList: Message[] = [];
-  private newMessage: Message;
 
   constructor(
     private http: HttpClient,
@@ -18,13 +18,12 @@ export class MessageListService {
   ) { }
 
   public create(message: string): Promise<Message> {
-    return new Promise((resolve, reject) => {
-      this.newMessage = {
+    return new Promise((resolve) => {
+      resolve({
         user: this.userService.get(),
         value: message,
         timestamp: Date.now() / 1000
-      };
-      resolve(this.newMessage);
+      })
     })
   }
 
@@ -53,13 +52,15 @@ export class MessageListService {
       .toPromise()
   }
 
-  // public put(message: Message[]): Promise<Message[]> {
+  public update(message: string): Promise<Message> {
+    return new Promise((resolve, reject) => {
+      
+    })
+  }
 
-  // }
-
-/**
- * TODO Refactoring
- */
+  /**
+   * TODO Refactoring
+   */
   // public push(message: Message): void {
 
   //   const getOptions = {

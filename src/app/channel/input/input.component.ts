@@ -30,12 +30,10 @@ export class InputComponent implements AfterViewInit {
   }
 
   public sendMessage() {
-    // const message: Message = {
-    //   user: this.userService.get(),
-    //   value: this.messageForm.get('message').value,
-    //   timestamp: Date.now() / 1000
-    // };
-    // this.messageListService.push(message);
+    this.messageListService
+      .update(this.messageForm.get('message').value)
+      .then(() => { })
+      .catch(() => { });
     this.messageForm.get('message').setValue('');
   }
 
