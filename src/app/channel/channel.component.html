@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card *ngIf="messageList">
 
   <ion-card-header color="primary">
 
@@ -16,11 +16,19 @@
 
     <ion-item *ngFor="let message of messageList">
 
-      <ion-avatar slot="start">
+      <ion-chip class="ion-margin-start">
 
-        <img src="assets/avatars/{{user.avatar}}.png">
+        <ion-avatar>
 
-      </ion-avatar>
+          <img src="assets/avatars/{{user.avatar}}.png">
+
+        </ion-avatar>
+
+        <ion-label>
+          {{user.pseudo}}
+        </ion-label>
+
+      </ion-chip>
 
       <ion-label>
         {{message.value}}
