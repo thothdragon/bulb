@@ -32,8 +32,12 @@ export class InputComponent implements AfterViewInit {
   public sendMessage() {
     this.messageListService
       .update(this.messageForm.get('message').value)
-      .then(() => { })
-      .catch(() => { });
+      .then(() => {
+        console.log('success !');
+      })
+      .catch(() => {
+        console.log('error !');
+      });
     this.messageForm.get('message').setValue('');
   }
 

@@ -1,4 +1,6 @@
-<ion-card *ngIf="messageList">
+<!-- <ion-content [scrollEvents]="true"> -->
+
+<ion-card fullscreen *ngIf="messageList">
 
   <ion-card-header color="primary">
 
@@ -15,6 +17,7 @@
   <ion-card-content>
 
     <ion-item *ngFor="let message of messageList">
+
 
       <ion-chip class="ion-margin-start">
 
@@ -34,9 +37,13 @@
         {{message.value}}
       </ion-label>
 
+      <ion-badge slot="end" color="light">
+        {{message.timestamp * 1000 | date: 'h:mm a, dd/MM/yyyy'}}
+      </ion-badge>
+
     </ion-item>
 
-    <app-input></app-input>
+    <app-input slot="bottom"></app-input>
 
   </ion-card-content>
 
@@ -45,3 +52,5 @@
 <a [routerLink]="['/login']">
   <ion-button>Exit Channel</ion-button>
 </a>
+
+<!-- </ion-content> -->

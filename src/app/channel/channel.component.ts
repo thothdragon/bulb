@@ -29,7 +29,6 @@ export class ChannelComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.user = this.userService.get();
-    // console.log(this.user);
     if (!this.user || !this.user.pseudo) {
       this.router.navigate(["/login"]);
       return;

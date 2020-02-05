@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { jsonBin } from 'src/environments/json-bin';
 import { UserService } from './user.service';
 import { resolve } from 'url';
+import { JsonBin } from '../models/json-bin.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,48 +53,55 @@ export class MessageListService {
       .toPromise()
   }
 
-  public update(message: string): Promise<Message> {
-    return new Promise((resolve, reject) => {
-      
-    })
+  public put(messageList: Message[]): Promise<JsonBin> {
+    const putOptions = {
+      headers: new HttpHeaders({
+        'secret-key': jsonBin.token,
+        'versioning': 'false'
+      })
+    };
+    return this.http
+      .put<JsonBin>(
+        jsonBin.path + jsonBin.bin.message,
+        messageList,
+        putOptions)
+      .toPromise()
   }
 
-  /**
-   * TODO Refactoring
-   */
-  // public push(message: Message): void {
+  public update(message: string): Promise<Message[]> {
+    return new Promise((resolve, reject) => {
 
-  //   const getOptions = {
-  //     headers: new HttpHeaders({
-  //       'secret-key': jsonBin.token,
-  //       // 'Access-Control-Allow-Origin': 'http://localhost:8100/',
-  //     })
-  //   };
-  //   this.http.get(jsonBin.path + jsonBin.bin.message, getOptions)
-  //     .toPromise()
-  //     .then((messageList: Message[]) => {
-  //       this.messageList.splice(0);
-  //       messageList.forEach((message) => {
-  //         this.messageList.push(message)
-  //       });
-  //       const putOptions = {
-  //         headers: new HttpHeaders({
-  //           'secret-key': jsonBin.token,
-  //           // 'Access-Control-Allow-Origin': 'http://localhost:8100/',
-  //           'versioning': 'false'
-  //         })
-  //       };
-  //       this.messageList.push(message);
-  //       this.http.put(jsonBin.path + jsonBin.bin.message, this.messageList, putOptions)
-  //         .toPromise()
-  //         .then((response) => { return response })
-  //         .catch((error: HttpErrorResponse) => { console.log(error) })
-  //         .finally();
-  //     })
-  //     .catch((error: HttpErrorResponse) => { return error })
-  //     .finally();
+      this.create(message)
+        .then((message: Message) => {
 
+          this.read()
+            .then((messageList: Message[]) => {
 
-  // }
+              this.messageList.push(message);
 
+              this.put(this.messageList)
+                .then((jsonBin: JsonBin) => {
+
+                  return resolve(this.messageList);
+
+                })
+                .catch(() => {
+
+                  reject("Erreur sur le put")
+
+                })
+            })
+            .catch(() => {
+
+              reject("Erreur de read")
+
+            })
+        })
+        .catch(() => {
+
+          reject("Erreur sur create - Improbable")
+
+        })
+    })
+  }
 }
