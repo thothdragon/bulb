@@ -21,9 +21,12 @@ export class ChannelComponent implements AfterViewInit {
     private messageListService: MessageListService,
   ) {
     this.messageListService
-      .watch(10000)
+      .watch(1000)
       .then((messageList: Message[]) => {
         this.messageList = messageList;
+      })
+      .catch((error) => { 
+        console.log(error);        
       });
   }
 

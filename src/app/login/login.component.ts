@@ -29,8 +29,8 @@ export class LoginComponent implements AfterViewInit {
       this.userService.set(user);
 
       // !!! Temp redirection to channel for form dev
-      user.pseudo = "Thoth"
-      this.router.navigate(["/channel"]);
+      // user.pseudo = "Thoth"
+      // this.router.navigate(["/channel"]);
       // !!! Temp redirection to channel for form dev
       return;
     }

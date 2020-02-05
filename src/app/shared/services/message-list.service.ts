@@ -12,6 +12,7 @@ export class MessageListService {
 
   private messageList: Message[] = [];
   private intervalId: number = 0;
+  private error: string;
 
   constructor(
     private http: HttpClient,
@@ -72,27 +73,6 @@ export class MessageListService {
       .toPromise()
   }
 
-  public watch(time: number): Promise<Message[]> {
-
-    return new Promise((resolve, reject) => {
-      if (!this.intervalId) {
-        this.intervalId = window.setInterval(() => {
-          console.log('Coucou');
-          this.read();
-        }, time);
-      };
-      resolve(this.messageList)
-    })
-  }
-
-  public clearWatch(): Promise<Message[]> {
-
-    return new Promise((resolve, reject) => {
-      clearInterval(this.intervalId);
-      this.intervalId = 0;
-      resolve(this.messageList)
-    })
-  }
 
   public update(message: string): Promise<Message[]> {
 
@@ -106,7 +86,7 @@ export class MessageListService {
               this.put(this.messageList)
                 .then((jsonBin: JsonBin) => {
                   // TODO declare and use time attribute
-                  this.watch(10000);
+                  this.watch(1000);
                   return resolve(this.messageList);
                 })
                 .catch(() => {
@@ -123,4 +103,27 @@ export class MessageListService {
     })
   }
 
+  public watch(time: number): Promise<Message[]> {
+
+    return new Promise((resolve, reject) => {
+      if (!this.intervalId) {
+        this.intervalId = window.setInterval(() => {
+          this.read()
+            .then(() => { })
+            .catch(() => { this.error = 'Erreur de read depuis watch' });
+        }, time);
+      };
+      resolve(this.messageList);
+      reject(this.error);
+    })
+  }
+
+  public clearWatch(): Promise<Message[]> {
+
+    return new Promise((resolve, reject) => {
+      clearInterval(this.intervalId);
+      this.intervalId = 0;
+      resolve(this.messageList)
+    })
+  }
 }
