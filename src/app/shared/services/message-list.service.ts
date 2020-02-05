@@ -3,7 +3,6 @@ import { Message } from '../models/message.model';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { jsonBin } from 'src/environments/json-bin';
 import { UserService } from './user.service';
-import { resolve } from 'url';
 import { JsonBin } from '../models/json-bin.model';
 
 @Injectable({
@@ -12,6 +11,7 @@ import { JsonBin } from '../models/json-bin.model';
 export class MessageListService {
 
   private messageList: Message[] = [];
+  private intervalId: number = 0;
 
   constructor(
     private http: HttpClient,
@@ -19,6 +19,7 @@ export class MessageListService {
   ) { }
 
   public create(message: string): Promise<Message> {
+
     return new Promise((resolve) => {
       resolve({
         user: this.userService.get(),
@@ -29,6 +30,7 @@ export class MessageListService {
   }
 
   public read(): Promise<Message[]> {
+
     return new Promise((resolve, reject) => {
       this.get()
         .then((messageList: Message[]) => {
@@ -43,6 +45,7 @@ export class MessageListService {
   }
 
   public get(): Promise<Message[]> {
+
     const options = {
       headers: new HttpHeaders({
         'secret-key': jsonBin.token
@@ -54,6 +57,7 @@ export class MessageListService {
   }
 
   public put(messageList: Message[]): Promise<JsonBin> {
+
     const putOptions = {
       headers: new HttpHeaders({
         'secret-key': jsonBin.token,
@@ -68,40 +72,55 @@ export class MessageListService {
       .toPromise()
   }
 
-  public update(message: string): Promise<Message[]> {
-    return new Promise((resolve, reject) => {
+  public watch(time: number): Promise<Message[]> {
 
+    return new Promise((resolve, reject) => {
+      if (!this.intervalId) {
+        this.intervalId = window.setInterval(() => {
+          console.log('Coucou');
+          this.read();
+        }, time);
+      };
+      resolve(this.messageList)
+    })
+  }
+
+  public clearWatch(): Promise<Message[]> {
+
+    return new Promise((resolve, reject) => {
+      clearInterval(this.intervalId);
+      this.intervalId = 0;
+      resolve(this.messageList)
+    })
+  }
+
+  public update(message: string): Promise<Message[]> {
+
+    return new Promise((resolve, reject) => {
+      this.clearWatch();
       this.create(message)
         .then((message: Message) => {
-
           this.read()
             .then((messageList: Message[]) => {
-
               this.messageList.push(message);
-
               this.put(this.messageList)
                 .then((jsonBin: JsonBin) => {
-
+                  // TODO declare and use time attribute
+                  this.watch(10000);
                   return resolve(this.messageList);
-
                 })
                 .catch(() => {
-
                   reject("Erreur sur le put")
-
                 })
             })
             .catch(() => {
-
               reject("Erreur de read")
-
             })
         })
         .catch(() => {
-
           reject("Erreur sur create - Improbable")
-
         })
     })
   }
+
 }
