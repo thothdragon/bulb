@@ -1,8 +1,14 @@
 img {
     height: 80%;
     // width: 100%;
-    display: flexbox;
-    vertical-align: middle;
+    // display: flexbox;
+    // vertical-align: middle;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 ion-footer {

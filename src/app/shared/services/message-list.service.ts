@@ -48,28 +48,29 @@ export class MessageListService {
   public get(): Promise<Message[]> {
 
     const options = {
-      headers: new HttpHeaders({
-        'secret-key': jsonBin.token
-      })
+      // headers: new HttpHeaders({
+      //   'secret-key': jsonBin.token
+      // })
     };
     return this.http
-      .get<Message[]>(jsonBin.path + jsonBin.bin.message, options)
+      .get<Message[]>(jsonBin.path /*+ jsonBin.bin.message, options*/)
       .toPromise()
   }
 
   public put(messageList: Message[]): Promise<JsonBin> {
 
     const putOptions = {
-      headers: new HttpHeaders({
-        'secret-key': jsonBin.token,
-        'versioning': 'false'
-      })
+      // headers: new HttpHeaders({
+      //   'secret-key': jsonBin.token,
+      //   'versioning': 'false'
+      // })
     };
     return this.http
       .put<JsonBin>(
-        jsonBin.path + jsonBin.bin.message,
-        messageList,
-        putOptions)
+        jsonBin.path /* + jsonBin.bin.message*/,
+        messageList//,
+        // putOptions
+      )
       .toPromise()
   }
 
@@ -86,7 +87,7 @@ export class MessageListService {
               this.put(this.messageList)
                 .then((jsonBin: JsonBin) => {
                   // TODO declare and use time attribute
-                  this.watch(1000);
+                  this.watch(5000);
                   return resolve(this.messageList);
                 })
                 .catch(() => {
@@ -106,15 +107,12 @@ export class MessageListService {
   public watch(time: number): Promise<Message[]> {
 
     return new Promise((resolve, reject) => {
-      if (!this.intervalId) {
-        this.intervalId = window.setInterval(() => {
-          this.read()
-            .then(() => { })
-            .catch(() => { this.error = 'Erreur de read depuis watch' });
-        }, time);
-      };
-      resolve(this.messageList);
-      reject(this.error);
+      this.clearWatch();
+      this.intervalId = window.setInterval(() => {
+        this.read()
+          .then(() => { resolve(this.messageList) })
+          .catch((error: HttpErrorResponse) => { reject(error) });
+      }, time);
     })
   }
 

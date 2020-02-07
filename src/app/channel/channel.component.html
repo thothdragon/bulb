@@ -1,56 +1,66 @@
-<!-- <ion-content [scrollEvents]="true"> -->
+<!-- <div> -->
 
-<ion-card fullscreen *ngIf="messageList">
-
-  <ion-card-header color="primary">
-
-    <ion-card-title>
-
-      <ion-badge color="success">
-        {{ messageList.length }}
-      </ion-badge> message(s) in the Channel.
-
-    </ion-card-title>
-
-  </ion-card-header>
-
-  <ion-card-content>
-
-    <ion-item *ngFor="let message of messageList">
-
-
-      <ion-chip class="ion-margin-start">
-
-        <ion-avatar>
-
-          <img src="assets/avatars/{{user.avatar}}.png">
-
-        </ion-avatar>
-
-        <ion-label>
-          {{user.pseudo}}
-        </ion-label>
-
-      </ion-chip>
-
+<div *ngIf="error">
+  <ion-card class="popupError">
+    <ion-card-header>
+      <ion-card-title>
+        Channel
+      </ion-card-title>
+    </ion-card-header>
+    <ion-item>
       <ion-label>
-        {{message.value}}
+        Message provide is not avalaible
       </ion-label>
-
-      <ion-badge slot="end" color="light">
-        {{message.timestamp * 1000 | date: 'h:mm a, dd/MM/yyyy'}}
-      </ion-badge>
-
+      <ion-button (click)="retry()" color="danger" slot="end">
+        Retry
+      </ion-button>
     </ion-item>
+  </ion-card>
+  <div class="obfuscator"> </div>
+</div>
 
-    <app-input slot="bottom"></app-input>
-
+<ion-card>
+  <ion-card-header color="primary">
+    <ion-card-title>
+      <h1>Channel</h1>
+      <div>
+        <ion-badge color="success">
+          <div *ngIf="messageList; else elseBlock">
+            {{ messageList.length }}
+          </div>
+          <ng-template #elseBlock>
+            0
+          </ng-template>
+        </ion-badge>
+        message(s) in the Channel.
+      </div>
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <div *ngIf="messageList">
+      <ion-item *ngFor="let message of messageList">
+        <ion-chip class="ion-margin-start">
+          <ion-avatar>
+            <!-- <img src="assets/avatars/{{message.user.avatar}}.png"> -->
+          </ion-avatar>
+          <ion-label>
+            {{message.user.pseudo}}
+          </ion-label>
+        </ion-chip>
+        <ion-label>
+          {{message.value}}
+        </ion-label>
+        <ion-badge slot="end" color="light">
+          {{message.timestamp * 1000 | date: 'h:mm a, dd/MM/yyyy'}}
+        </ion-badge>
+      </ion-item>
+    </div>
   </ion-card-content>
-
+  <app-input></app-input>
 </ion-card>
 
-<a [routerLink]="['/login']">
-  <ion-button>Exit Channel</ion-button>
-</a>
+<!-- </div> -->
 
-<!-- </ion-content> -->
+<!-- <a [routerLink]="['/login']">
+  <ion-button>Exit Channel</ion-button>
+</a> -->
